@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=myapp
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis
+    environment:
+     - REDIS_REPLICATION_MODE=master
+    command: src/redis-server --requirepass sOmE_sEcUrE_pAsS
+    ports:
+     - "6379:6379"
+    volumes:
+     - $PWD/redis-data:/var/lib/redis
+     - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+    

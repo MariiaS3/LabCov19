@@ -40,12 +40,12 @@ class VisitViews(viewsets.ModelViewSet):
         spec_id = self.request.query_params.get('spec_id')
         return Visit.objects.filter(doctor__specialization__id = spec_id).distinct()
 
-class MailView(viewsets.ViewSet):
-    def send(request):
-        json_data = json.loads(request.body)
-        print(json_data)
-        task = task_send_email(json_data['subject'], json_data['message'], json_data['send_to'])
-        return HttpResponse("Mail is being sent!")
+# class MailView(viewsets.ViewSet):
+#     def send(request):
+#         json_data = json.loads(request.body)
+#         print(json_data)
+#         task = task_send_email(json_data['subject'], json_data['message'], json_data['send_to'])
+#         return HttpResponse("Mail is being sent!")
  
   
   

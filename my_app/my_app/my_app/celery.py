@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals # for python2
 import os
 from celery import Celery
  
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'msi.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'my_app.settings')
  
 BASE_REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
  
