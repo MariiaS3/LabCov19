@@ -38,3 +38,19 @@ https://docs.celeryproject.org/en/stable/ - dokumentacja Celery
 Tutorial do Django + Celery + Redis
 https://stackabuse.com/asynchronous-tasks-in-django-with-redis-and-celery/
 https://www.codingforentrepreneurs.com/blog/celery-redis-django/
+
+
+
+
+
+
+
+#Planowanie:
+1. LabCov19;
+2. testy covid-19, szczepienia covid-19;
+3. Pacjent: imie, nazwisko, wiek, plec, nr. telefonu , mail, czy chce sie szczepic;  
+5. Pielegniarka:  ma liste pacjentow, wysyla wyniki mailem;
+#Dodatkowe:
+7. Platnosc za testy (jesli tego niema to bierzemy ze testy bezplatne) 
+8. Rejestracja przez discorda
+ 
