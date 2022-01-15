@@ -1,2 +1,4 @@
-*__pycache__ 
-*activate.csh
+/__pycache__ 
+activate.csh
+/.idea 
+/migrations
