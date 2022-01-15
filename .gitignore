@@ -5,3 +5,4 @@ activate.csh
 .DS_Store
 .idea/
 my_app/.idea/workspace.xml
+workspace.xml
