@@ -50,7 +50,8 @@ https://www.codingforentrepreneurs.com/blog/celery-redis-django/
 2. testy covid-19, szczepienia covid-19;
 3. Pacjent: imie, nazwisko, wiek, plec, nr. telefonu , mail, czy chce sie szczepic;  
 5. Pielegniarka:  ma liste pacjentow, wysyla wyniki mailem;
+
 #Dodatkowe:
-7. Platnosc za testy (jesli tego niema to bierzemy ze testy bezplatne) 
-8. Rejestracja przez discorda
+1. Platnosc za testy (jesli tego niema to bierzemy ze testy bezplatne) 
+2. Rejestracja przez discorda
  
