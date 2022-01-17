@@ -1,4 +1,4 @@
-__pycache__/ 
+my_app/my_app/api_app/__pycache__/ 
 activate.csh
 .idea/ 
 migrations/
@@ -8,4 +8,7 @@ my_app/.idea/
 workspace.xml
 env/
 venv/
-
+/env
+env
+.DS_Store.*
+.DS_Store*
