@@ -1,6 +1,4 @@
-my_app/my_app/api_app/__pycache__/ 
-activate.csh
-.idea/ 
+idea/
 migrations/
 .DS_Store
 .DS_Store/
@@ -12,3 +10,4 @@ venv/
 env
 .DS_Store.*
 .DS_Store*
+
