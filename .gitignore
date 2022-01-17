@@ -1,8 +1,10 @@
-/__pycache__ 
+__pycache__/ 
 activate.csh
-/.idea 
-/migrations
+.idea/ 
+migrations/
 .DS_Store
-.idea/
-my_app/.idea/workspace.xml
+.DS_Store/
+my_app/.idea/
 workspace.xml
+env/
+venv/
