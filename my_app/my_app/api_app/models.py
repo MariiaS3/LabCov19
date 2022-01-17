@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, UserManager
 
 # Create your models here.
@@ -9,7 +8,7 @@ class Specialization(models.Model):
     def __str__(self):
         return self.name
 
-class HospitalUser(AbstractBaseUser):
+class LablUser(AbstractBaseUser):
     username = models.CharField(max_length=50, unique=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -26,16 +25,22 @@ class HospitalUser(AbstractBaseUser):
     class Meta:
         abstract=True
 
-class Doctor(HospitalUser):
-    specialization = models.ManyToManyField(Specialization)
-
-class Patient(HospitalUser):
+class Nurse(LablUser):
+    #specialization = models.ManyToManyField(Specialization)
     pass
 
+class Patient(LablUser):
+    VACCINE_CHOICE = (  # czy chce sie szczepic
+        ('Y', 'YES'),
+        ('N', 'NO'),
+    )
+    do_you_want_vaccine = models.CharField(max_length=1, choices=VACCINE_CHOICE)
+
+
 class Visit(models.Model):
-    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
-    data = models.DateField()
-    location = models.CharField(max_length=50)
+    # nurse = models.ForeignKey(Nurse, on_delete=models.CASCADE)
+    data = models.DateField() #data wizyty
+    # location = models.CharField(max_length=50) jestesmy biedne i mamy jedna placowke XDDD
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     # patient = models.OneToOneField(Patient,on_delete=models.PROTECT, related_name='Patient',null=True,blank=True)
 
