@@ -23,9 +23,9 @@ from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshVie
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'doctors', views.DoctorViews)
+router.register(r'nurse', views.NurseViews)
 router.register(r'patient',views.PatientViews)
-router.register(r'specialization',views.SpecializationViews)
+# router.register(r'specialization',views.SpecializationViews)
 router.register(r'visit',views.VisitViews)
 
 # The API URLs are now determined automatically by the router.
