@@ -1,6 +1,14 @@
-idea/
 migrations/
 .DS_Store
+.idea/ 
+migrations/
+.DS_Store
+.DS_Store/
+my_app/.idea/
+workspace.xml
+env/
+venv/
+idea/
 my_app/.idea/
 workspace.xml
 env/
