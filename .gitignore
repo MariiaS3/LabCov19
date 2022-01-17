@@ -18,4 +18,4 @@ my_app/my_app/api_app/__pycache__/
 dump.rdb
 my_app/my_app/redis-data/
 my_app/my_app/redis.conf/
-myapp/.idea/
+my_app/.idea/
