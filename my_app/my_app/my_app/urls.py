@@ -36,5 +36,5 @@ urlpatterns = [
     path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('widok', widok),
-#   path('template', template),
+    path('template', template),
 ]
