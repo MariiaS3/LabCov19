@@ -30,11 +30,7 @@ class Nurse(LablUser):
     pass
 
 class Patient(LablUser):
-    VACCINE_CHOICE = (  # czy chce sie szczepic
-        ('Y', 'YES'),
-        ('N', 'NO'),
-    )
-    do_you_want_vaccine = models.CharField(max_length=1, choices=VACCINE_CHOICE)
+    pass
 
 
 class Visit(models.Model):
@@ -43,5 +39,8 @@ class Visit(models.Model):
     # location = models.CharField(max_length=50) jestesmy biedne i mamy jedna placowke XDDD
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     # patient = models.OneToOneField(Patient,on_delete=models.PROTECT, related_name='Patient',null=True,blank=True)
-
-
+    VACCINE_CHOICE = (  # czy chce sie szczepic
+        ('Y', 'YES'),
+        ('N', 'NO'),
+    )
+    do_you_want_vaccine = models.CharField(max_length=1, choices=VACCINE_CHOICE)
