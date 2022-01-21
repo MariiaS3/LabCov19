@@ -19,7 +19,7 @@ from rest_framework.routers import DefaultRouter
 from api_app import views
 #from my_app.api_app import views
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,)
-
+from api_app.views import widok,template
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -35,4 +35,6 @@ urlpatterns = [
     # path('api/mail', views.MailView.send),
     path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('widok', widok),
+#   path('template', template),
 ]
