@@ -15,6 +15,7 @@ class LablUser(AbstractBaseUser):
     date_of_birth = models.DateField()
     email = models.CharField(max_length=200, unique=True)
     phone_number = models.CharField(max_length=10, unique=True, null=False, blank=False)
+    token = ""
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),
