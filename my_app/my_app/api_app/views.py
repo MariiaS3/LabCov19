@@ -82,7 +82,7 @@ class NurseViews(generics.GenericAPIView):
             serializer_class = NurseSerializer(data=request.data)
             if serializer_class.is_valid(raise_exception=True):
                 serializer_class.save()
-                messages.success(request, 'Account was created for ')
+                messages.success(request, 'Account created :) Please now log in.')
                 return  redirect('login')
             else:
                 return render(request, 'signup.html', {})
@@ -107,6 +107,13 @@ def widok(request,*args,**kwargs):
 def template(request,*args,**kwargs):
     print("Zalogowany jako: ", request.user)
     return render(request, "signin.html",{})
+
+
+def main(request,*args,**kwargs):
+    print("Zalogowany jako: ", request.user)
+    return render(request, "index.html",{})
+
+
 
 
 
