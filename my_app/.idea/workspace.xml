@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a320e69b-4119-4950-ab6f-61ddc307f1e8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/api_app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/api_app/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/my_app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/my_app/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/templates/stronka.html" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/templates/stronka.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +65,7 @@
       <workItem from="1642095080236" duration="5966000" />
       <workItem from="1642112571183" duration="266000" />
       <workItem from="1642263068749" duration="1372000" />
-      <workItem from="1642775521612" duration="8100000" />
+      <workItem from="1642775521612" duration="8892000" />
     </task>
     <servers />
   </component>
