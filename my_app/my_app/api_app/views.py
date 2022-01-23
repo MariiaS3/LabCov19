@@ -11,7 +11,7 @@ from .task import task_send_email
 import json
 from django.core.mail import send_mail
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
@@ -49,19 +49,15 @@ class Login(generics.GenericAPIView):
                 user = Nurse.objects.get(username=email)
             user.token = uuid4()
             user.save()
+            login(request, user)
             return render(request, 'stronka.html', {})
         return render(request, 'signin.html', {})
 
-
-class Logout(generics.GenericAPIView):
-    queryset = Nurse.objects.all()
-    serializer_class = UserLogoutSerializer
-
-    def post(self, request, *args, **kwargs):
-        serializer_class = UserLogoutSerializer(data=request.data)
-        if serializer_class.is_valid(raise_exception=True):
-            return Response(serializer_class.data, status=status.HTTP_200_OK)
-        return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
+@login_required(login_url='login')
+def Logout(request):
+    logout(request)
+    return redirect('login')
+  
 
 
 class MyObtainTokenPairView(TokenObtainPairView):
