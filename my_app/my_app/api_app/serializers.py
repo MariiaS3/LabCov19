@@ -1,29 +1,28 @@
 from rest_framework import serializers
-from .models import Nurse, Patient, Visit
+from .models import Nurse, Visit
 from rest_framework import serializers
 from django.conf import settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .task import task_send_email
-
+from django.db.models import Q
+from django.core.exceptions import ValidationError
+from uuid import uuid4
 
 class NurseSerializer(serializers.ModelSerializer):
 
     class Meta:
-         model = Nurse
-         fields = '__all__'
-         extra_kwargs = {'password': {'write_only': True}}
+        model = Nurse
+        fields = (
+            'username',
+            'email',
+            'password',
+            'phone_number',
 
-
-class PatientSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Patient
-        fields = '__all__'
+        )
         extra_kwargs = {'password': {'write_only': True}}
 
-# class SpecalizationSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Specialization
-#         fields = '__all__'
+  
+
 
 class VisitSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
@@ -44,3 +43,24 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         # Add custom claims
         token['username'] = user.username
         return token
+
+class UserLogoutSerializer(serializers.ModelSerializer):
+    token = serializers.CharField()
+
+    def validate(self, data):
+        token = data.get("token", None)
+        print(token)
+        user = None
+        try:
+            user = Nurse.objects.get(token=token)
+        except Exception as e:
+            raise ValidationError(str(e))
+        user.token = ""
+        user.save()
+        return data
+
+    class Meta:
+        model = Nurse
+        fields = (
+            'token',
+        )
