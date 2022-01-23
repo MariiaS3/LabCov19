@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Helvetica;
+            background: rgb(2, 2, 2);
+        }
+        
+        div {
+            margin: 150px;
+        }
+        
+        table {
+            margin-left: 450px;
+            font-size: 18px;
+            border-collapse: collapse;
+            width: 70%;
+            max-width: 100%;
+            background-color: white;
+        }
+        
+        td,
+        th {
+            text-align: center;
+            padding: 10px;
+            font-size: 18px;
+        }
+        
+        thead th {
+            color: #ffffff;
+            background: #4FC3A1;
+        }
+        
+        thead th:nth-child(odd) {
+            color: #ffffff;
+            background: #324960;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Data of birth</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Number</th>
+                    <th>Data</th>
+                    <th>Vaccine</th>
+                </tr>
+                <tbody>
+                    {% for i in visits %}
+                    <tr>
+                        <td>{{i.first_name}}</td>
+                        <td>{{i.last_name}}</td>
+                        <td>{{i.date_of_birth}}</td>
+                        <td>{{i.gender}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.phone_number}}</td>
+                        <td>{{i.data}}</td>
+                        <td>{{i.do_you_want_vaccine}}</td>
+                    </tr>
+                    {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>

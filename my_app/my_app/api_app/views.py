@@ -1,7 +1,7 @@
 from atexit import register
 from django.conf import settings
 from rest_framework import  viewsets
-from .serializers import  NurseSerializer, VisitSerializer, UserLogoutSerializer
+from .serializers import  NurseSerializer, VisitSerializer
 from .models import  Nurse, Visit
 from .serializers import MyTokenObtainPairSerializer
 from rest_framework.permissions import AllowAny
@@ -11,16 +11,13 @@ from .task import task_send_email
 import json
 from django.core.mail import send_mail
 from django.shortcuts import render
-
+from django.contrib.auth.decorators import login_required
 from rest_framework import generics
-from rest_framework.response import Response
-from rest_framework import status
 from django.shortcuts import render, redirect 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import  login, logout
 from django.contrib import messages
 
 from django.db.models import Q
-from django.core.exceptions import ValidationError
 from uuid import uuid4
 
 class Login(generics.GenericAPIView):
@@ -49,20 +46,22 @@ class Login(generics.GenericAPIView):
                 user = Nurse.objects.get(username=email)
             user.token = uuid4()
             user.save()
+            login(request, user)
             return render(request, 'stronka.html', {})
         return render(request, 'signin.html', {})
 
 
-class Logout(generics.GenericAPIView):
-    queryset = Nurse.objects.all()
-    serializer_class = UserLogoutSerializer
 
-    def post(self, request, *args, **kwargs):
-        serializer_class = UserLogoutSerializer(data=request.data)
-        if serializer_class.is_valid(raise_exception=True):
-            return Response(serializer_class.data, status=status.HTTP_200_OK)
-        return Response(serializer_class.errors, status=status.HTTP_400_BAD_REQUEST)
+@login_required(login_url='login')
+def Logout(request):
+    logout(request)
+    return redirect('login')
+  
+# @login_required(login_url='login')
+def visitsList(request):
+    visits = Visit.objects.all()
 
+    return render(request, 'visits.html', {'visits':visits})
 
 class MyObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)
