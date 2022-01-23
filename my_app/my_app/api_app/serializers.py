@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Nurse, Patient, Visit
+from .models import Nurse, Visit
 from rest_framework import serializers
 from django.conf import settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -15,17 +15,6 @@ class NurseSerializer(serializers.ModelSerializer):
          fields = '__all__'
          extra_kwargs = {'password': {'write_only': True}}
 
-
-class PatientSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Patient
-        fields = '__all__'
-        extra_kwargs = {'password': {'write_only': True}}
-
-# class SpecalizationSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Specialization
-#         fields = '__all__'
 
 class VisitSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
@@ -83,7 +72,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
             'email',
             'password',
         )
-        
+
     def create(self, validated_data):
         user = Nurse(
             email=validated_data['email'],
