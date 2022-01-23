@@ -1,6 +1,6 @@
-# from django.contrib import admin
-# from django.db.models.base import Model
-# from .models import Doctor, Patient
+from django.contrib import admin
+from django.db.models.base import Model
+from .models import Nurse, Visit
 
-# admin.site.register(Doctor)
-# admin.site.register(Patient)
+admin.site.register(Nurse)
+admin.site.register(Visit)
