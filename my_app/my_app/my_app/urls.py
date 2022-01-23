@@ -30,6 +30,7 @@ router.register(r'visit',views.VisitViews)
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
     path('', include(router.urls)),
+
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('api/mail', views.MailView.send),
     # path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
