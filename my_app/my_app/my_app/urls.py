@@ -23,7 +23,7 @@ from api_app.views import widok,template
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'nurse', views.NurseViews)
+# router.register(r'nurse', views.NurseViews)
 router.register(r'visit',views.VisitViews)
 
 
@@ -34,9 +34,9 @@ urlpatterns = [
     # path('api/mail', views.MailView.send),
     # path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('login/', views.loginPage, name="login"), 
-    path('signin/', views.Login.as_view(), name="login"),
-    path('signout/', views.Logout.as_view(), name="logout"),
+    path('login/', views.Login.as_view(), name="login"),
+    path('logout/', views.Logout.as_view(), name="logout"),
+    path('signup/', views.NurseViews.as_view(), name="signup"),
     path('widok', widok),
     path('template', template),
 ]
