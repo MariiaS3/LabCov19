@@ -24,19 +24,18 @@ from api_app.views import widok,template
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'nurse', views.NurseViews)
-router.register(r'patient',views.PatientViews)
-# router.register(r'specialization',views.SpecializationViews)
 router.register(r'visit',views.VisitViews)
+
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
     path('', include(router.urls)),
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('api/mail', views.MailView.send),
-    # path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
+    path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('login/', views.Login.as_view(), name="login"),
-    path('logout/', views.Logout.as_view(), name="logout"),
+    path('signin/', views.Login.as_view(), name="login"),
+    path('signout/', views.Logout.as_view(), name="logout"),
     path('widok', widok),
     path('template', template),
 ]

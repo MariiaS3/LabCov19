@@ -1,7 +1,7 @@
 from django.conf import settings
 from rest_framework import  viewsets
-from .serializers import  NurseSerializer, PatientSerializer, VisitSerializer, UserLogoutSerializer,UserLoginSerializer
-from .models import  Nurse, Patient,  Visit
+from .serializers import  NurseSerializer, VisitSerializer, UserLogoutSerializer,UserLoginSerializer
+from .models import  Nurse, Visit
 from .serializers import MyTokenObtainPairSerializer
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -49,10 +49,10 @@ class NurseViews(viewsets.ModelViewSet):
     serializer_class = NurseSerializer
     # permission_classes = [permissions.IsAuthenticated]'
 
-class PatientViews(viewsets.ModelViewSet):
-    queryset = Patient.objects.all()
-    authentication_classes = []
-    serializer_class = PatientSerializer
+# class PatientViews(viewsets.ModelViewSet):
+#     queryset = Patient.objects.all()
+#     authentication_classes = []
+#     serializer_class = PatientSerializer
     # permission_classes = [permissions.IsAuthenticated]
 #
 # class SpecializationViews(viewsets.ModelViewSet):
