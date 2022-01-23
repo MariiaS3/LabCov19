@@ -34,7 +34,7 @@ urlpatterns = [
     # path('api/mail', views.MailView.send),
     # path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    # path('login/', views.loginPage, name="login"), 
+    path('login/', views.loginPage, name="login"), 
     path('signin/', views.Login.as_view(), name="login"),
     path('signout/', views.Logout.as_view(), name="logout"),
     path('widok', widok),

@@ -43,6 +43,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
     # token = serializers.CharField(required=False, read_only=True)
 
     def validate(self, data):
+    
         # user,email,password validator
         email = data.get("email", None)
         password = data.get("password", None)

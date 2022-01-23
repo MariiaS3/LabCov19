@@ -1,3 +1,4 @@
+from atexit import register
 from django.conf import settings
 from rest_framework import  viewsets
 from .serializers import  NurseSerializer, VisitSerializer, UserLogoutSerializer,UserLoginSerializer
@@ -18,6 +19,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+from django.db.models import Q
+from django.core.exceptions import ValidationError
+from uuid import uuid4
+
 class Login(generics.GenericAPIView):
     # get method handler
     queryset = Nurse.objects.all()
@@ -27,31 +32,41 @@ class Login(generics.GenericAPIView):
         serializer_class = UserLoginSerializer(data=request.data)
         if serializer_class.is_valid(raise_exception=True):
             return render(request, "signin.html",{'data':serializer_class.data})#Response(serializer_class.data, status=HTTP_200_OK)
+        else:
+            messages.info(request, 'Username OR password is incorrect')
         return render(request, "signin.html",{})#Response(serializer_class.errors, status=HTTP_400_BAD_REQUEST)
         
 
         #     return render(request, "signin.html",{'data': serializer_class.data})#Response(serializer_class.data, status=HTTP_200_OK)
         # return Response(serializer_class.errors, status=HTTP_400_BAD_REQUEST)
+    
+def loginPage(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password =request.POST.get('password')
+        print(email)
+        if not email and not password:
+            raise ValidationError("Details not entered.")
+        user  = None
+            # if the email has been passed
+        if '@' in email:
+            user = Nurse.objects.filter(Q(email=email) & Q(password=password)).distinct()
+            if not user.exists():
+                messages.info(request, 'Username OR password is incorrect')
+                return  render(request, 'signin.html', {})
+            user = Nurse.objects.get(email=email)
+        else:
+            user = Nurse.objects.filter(Q(username=email) & Q(password=password)).distinct()
+            if not user.exists():
+                messages.info(request, 'Username OR password is incorrect')
+                return  render(request, 'signin.html', {})
+            user = Nurse.objects.get(username=email)
+        user.token = uuid4()
+        user.save()
+        return render(request, 'stronka.html', {})
+    return render(request, 'signin.html', {})
 
-# def loginPage(request):
-# 	if request.user.is_authenticated:
-# 		return redirect('home')
-# 	else:
-# 		if request.method == 'POST':
-# 			username = request.POST.get('email')
-# 			password =request.POST.get('password')
 
-# 			user = authenticate(request, username=username, password=password)
-
-# 			if user is not None:
-# 				login(request, user)
-# 				return redirect('home')
-# 			else:
-# 				messages.info(request, 'Username OR password is incorrect')
-
-# 		context = {}
-# 		return render(request, 'signin.html', context)
-        
 class Logout(generics.GenericAPIView):
     queryset = Nurse.objects.all()
     serializer_class = UserLogoutSerializer
