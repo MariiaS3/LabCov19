@@ -23,7 +23,7 @@ from api_app.views import widok,template,main,visitsList
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 # router.register(r'nurse', views.NurseViews)
-router.register(r'visit',views.VisitViews)
+# router.register(r'visit',views.VisitViews)
 
 
 # The API URLs are now determined automatically by the router.
@@ -39,6 +39,7 @@ urlpatterns = [
     path('login/', views.Login.as_view(), name="login"),
     path('logout/', views.Logout, name="logout"),
     path('signup/', views.NurseViews.as_view(), name="signup"),
+    path('visit/', views.NurseViews.as_view(), name="visit"),
     path('visits', visitsList),
     path('widok', widok),
     path('template', template),

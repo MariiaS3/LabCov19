@@ -6,7 +6,6 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .task import task_send_email
 
 class NurseSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Nurse
         fields = (
@@ -22,12 +21,11 @@ class NurseSerializer(serializers.ModelSerializer):
 
 
 class VisitSerializer(serializers.ModelSerializer):
-    def create(self, validated_data):
-        # validated_data['doctor'] = self.context['request'].user
-        instance = super().create(validated_data)
-        task = task_send_email('Wyniki','wszystko dobrze zyjesz',instance.email)
-        return instance
-   
+    # def create(self, validated_data):
+    #     # validated_data['doctor'] = self.context['request'].user
+    #     instance = super().create(validated_data)
+    #     task = task_send_email('Wyniki','wszystko dobrze zyjesz',instance.email)
+    #     return instance
     class Meta:
          model = Visit
          fields = '__all__'
