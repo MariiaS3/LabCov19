@@ -18,7 +18,7 @@ from django.contrib.auth import  login, logout
 from django.contrib import messages
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
-from uuid import uuid4
+
 
 class Login(generics.GenericAPIView):
 
@@ -88,10 +88,24 @@ class NurseViews(generics.GenericAPIView):
 
 
 
-class VisitViews(viewsets.ModelViewSet):
+class VisitViews(generics.GenericAPIView):
     queryset = Visit.objects.all()
-    authentication_classes = []
     serializer_class = VisitSerializer
+     
+    def get(self, request, *args, **kwargs):
+        return render(request, "signup.html", {})
+
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            print(request.data)
+            serializer_class = VisitSerializer(data=request.data)
+            if serializer_class.is_valid(raise_exception=True):
+                serializer_class.save()
+                messages.success(request, '.....')
+                return  redirect('login')
+            else:
+                return render(request, 'signup.html', {})
+        return render(request, 'signup.html', {})
 
     # def get_queryset(self):
     #     spec_id = self.request.query_params.get('spec_id')
