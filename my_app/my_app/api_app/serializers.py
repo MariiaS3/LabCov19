@@ -35,7 +35,6 @@ class VisitSerializer(serializers.ModelSerializer):
          model = Visit
          fields = '__all__'
 
-#nie dziala testowe
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
