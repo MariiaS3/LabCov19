@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <script type="text/javascript">
+        function createCookie(cookieName, cookieValue, daysToExpire) {
+            var date = new Date();
+            date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 100));
+            document.cookie = cookieName + "=" + cookieValue + "; path=/" + "; expires=" + date.toGMTString();
+        }
+
+        function accessCookie(cookieName) {
+            var name = cookieName + "=";
+            var allCookieArray = document.cookie.split(';');
+            for (var i = 0; i < allCookieArray.length; i++) {
+                var temp = allCookieArray[i].trim();
+                if (temp.indexOf(name) == 0)
+                    return temp.substring(name.length, temp.length);
+            }
+            return "";
+        }
+
+        function checkCookie(name) {
+            var user = accessCookie("testCookie");
+            if (user == "")
+            // alert("Welcome Back " + user + "!!!");
+            // else {
+                num = 1;
+            if (name != "" && name != null) {
+                createCookie("testCookie", name, num);
+            }
+            // }
+        }
+    </script>
+</head>
+{% if token%}
+
+<body onload="checkCookie('{{token}}')">
+
+</body>
+{% endif %}
+
+</html>

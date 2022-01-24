@@ -16,7 +16,7 @@ from rest_framework import generics
 from django.shortcuts import render, redirect 
 from django.contrib.auth import  login, logout
 from django.contrib import messages
-
+from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
 from uuid import uuid4
 
@@ -44,17 +44,16 @@ class Login(generics.GenericAPIView):
                     messages.info(request, 'Username OR password is incorrect')
                     return  render(request, 'signin.html', {})
                 user = Nurse.objects.get(username=email)
-            user.token = uuid4()
+            refresh = RefreshToken.for_user(user)
+            user.token = str(refresh.access_token)
             user.save()
-            login(request, user)
-            return render(request, 'stronka.html', {})
+            print(user.token)
+            return render(request, 'cookies.html', {'token': user.token})
         return render(request, 'signin.html', {})
 
 
 
-@login_required(login_url='login')
 def Logout(request):
-    logout(request)
     return redirect('login')
   
 # @login_required(login_url='login')
