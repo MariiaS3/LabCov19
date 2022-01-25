@@ -15,8 +15,6 @@ class LablUser(AbstractBaseUser):
 class Nurse(LablUser):
     pass
 
-
-
 class Visit(models.Model):
     data = models.DateField() #data wizyty
     first_name = models.CharField(max_length=100)

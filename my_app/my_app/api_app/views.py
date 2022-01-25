@@ -18,7 +18,7 @@ from django.contrib.auth import  login, logout
 from django.contrib import messages
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
-
+from .forms import VisitForm
 
 class Login(generics.GenericAPIView):
 
@@ -126,8 +126,18 @@ def main(request,*args,**kwargs):
     return render(request, "index.html",{})
 
 
+def visit(request,*args,**kwargs):
+    print("Zalogowany jako: ", request.user)
+    return render(request, "visit.html",{})
 
+def NewVisit(request):
+    form = VisitForm(request.POST or None)
+    if form.is_valid():
+        form.save(commit=True) #zapisz do bazy
+        form=VisitForm() # refresh
 
+    context = {
+        'form' : form
+    }
 
-
-   
+    return render(request,"newvisit.html", context)
