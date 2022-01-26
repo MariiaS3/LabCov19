@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'api_app',
     'my_app',
+    'materializecssform',
+
 ]
 
 MIDDLEWARE = [
