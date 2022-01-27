@@ -49,6 +49,7 @@ class Login(generics.GenericAPIView):
             user.save()
             print(user.token)
             return render(request, 'cookies.html', {'token': user.token})
+            # return render(request, 'visits.html', {'token': user.token})
         return render(request, 'signin.html', {})
 
 
@@ -135,7 +136,7 @@ def NewVisit(request):
     if form.is_valid():
         form.save(commit=True) #zapisz do bazy
         form=VisitForm() # refresh
-
+        print("Successfully registered.")
     context = {
         'form' : form
     }
