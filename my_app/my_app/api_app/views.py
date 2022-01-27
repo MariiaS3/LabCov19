@@ -1,4 +1,5 @@
 from atexit import register
+from socket import timeout
 from django.conf import settings
 from rest_framework import  viewsets
 from .serializers import  NurseSerializer, VisitSerializer
@@ -19,6 +20,7 @@ from django.contrib import messages
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
 from .forms import VisitForm
+import re
 
 class Login(generics.GenericAPIView):
 
@@ -35,37 +37,51 @@ class Login(generics.GenericAPIView):
             if '@' in email:
                 user = Nurse.objects.filter(Q(email=email) & Q(password=password)).distinct()
                 if not user.exists():
-                    messages.info(request, 'Username OR password is incorrect')
+                    messages.info(request, 'Email OR password is incorrect')
                     return  render(request, 'signin.html', {})
                 user = Nurse.objects.get(email=email)
             else:
-                user = Nurse.objects.filter(Q(username=email) & Q(password=password)).distinct()
-                if not user.exists():
-                    messages.info(request, 'Username OR password is incorrect')
-                    return  render(request, 'signin.html', {})
-                user = Nurse.objects.get(username=email)
+                messages.info(request, 'Email OR password is incorrect')
+                return  render(request, 'signin.html', {})
             refresh = RefreshToken.for_user(user)
             user.token = str(refresh.access_token)
             user.save()
             print(user.token)
             return render(request, 'cookies.html', {'token': user.token})
-            # return render(request, 'visits.html', {'token': user.token})
         return render(request, 'signin.html', {})
 
 
 
 def Logout(request):
+    
     return redirect('login')
   
 # @login_required(login_url='login')
 def visitsList(request):
     visits = Visit.objects.all()
-
     return render(request, 'visits.html', {'visits':visits})
+    
 
 class MyObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)
     serializer_class = MyTokenObtainPairSerializer
+
+def password_check(password):
+ length_error = len(password) < 8 #
+ digit_error = re.search(r"\d", password) is None 
+ uppercase_error = re.search(r"[A-Z]", password) is None 
+ lowercase_error = re.search(r"[a-z]", password) is None 
+ symbol_error = re.search(r"[ !#$%&'()*+,-./[\\\]^_`{|}~"+r'"]', password) is None 
+ password_ok = not ( length_error or digit_error or uppercase_error or lowercase_error or symbol_error ) 
+ 
+ return {
+ 'password_ok' : password_ok,
+ 'length_error' : length_error,
+ 'digit_error' : digit_error,
+ 'uppercase_error' : uppercase_error,
+ 'lowercase_error' : lowercase_error,
+ 'symbol_error' : symbol_error,
+ }
 
 class NurseViews(generics.GenericAPIView):
     queryset = Nurse.objects.all()
@@ -77,13 +93,40 @@ class NurseViews(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         print(Nurse.objects.all())
         if request.method == 'POST':
-            print(request.data)
-            serializer_class = NurseSerializer(data=request.data)
-            if serializer_class.is_valid(raise_exception=True):
-                serializer_class.save()
-                messages.success(request, 'Account created :) Please now log in.')
-                return  redirect('login')
+            email = request.data['email']
+            password = request.data['password']
+            password2 = request.data['password2']
+            if '@' in email:
+                haslo=password_check(password)
+                if haslo['password_ok']:
+                    if password == password2:    
+                        serializer_class = NurseSerializer(data=request.data)
+                        if serializer_class.is_valid(raise_exception=True):
+                            serializer_class.save()
+                            messages.info(request, 'Account created :) Please now log in.')
+                            return  redirect('login')
+                        else:
+                            messages.info(request, 'Something wrong')
+                            return render(request, 'signup.html', {})
+                    else:
+                        messages.info(request, 'Passwords vary')
+                        return render(request, 'signup.html', {})
+                message = ""
+                if  haslo['length_error']:
+                    message += "Password contains at least 8 characters\n"
+                if  haslo['digit_error']:
+                    message += "Password contains at least one digit character\n"
+                if  haslo['uppercase_error']:
+                    message += "Password contains at least one upper character\n"
+                if  haslo['lowercase_error']:
+                    message += "Password contains at least one lower character\n"
+                if  haslo['symbol_error']:
+                    message += "Password contains at least one special character\n"  
+                print(message)
+                messages.info(request, message)
+                return render(request, 'signup.html', {})
             else:
+                messages.info(request, 'Email is incorrect')
                 return render(request, 'signup.html', {})
         return render(request, 'signup.html', {})
 
@@ -127,16 +170,18 @@ def main(request,*args,**kwargs):
     return render(request, "index.html",{})
 
 
-def visit(request,*args,**kwargs):
-    print("Zalogowany jako: ", request.user)
-    return render(request, "visit.html",{})
-
 def NewVisit(request):
     form = VisitForm(request.POST or None)
-    if form.is_valid():
-        form.save(commit=True) #zapisz do bazy
-        form=VisitForm() # refresh
-        print("Successfully registered.")
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save(commit=True) #zapisz do bazy
+            form=VisitForm() # refresh
+            messages.success(request, 'Successfully registered.')
+            print("Successfully registered.")
+            # return render(request,"newvisit.html", {})
+        else:
+            messages.error(request, '.........')
+    
     context = {
         'form' : form
     }

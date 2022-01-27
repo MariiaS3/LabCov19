@@ -8,40 +8,102 @@
     <style>
         body {
             font-family: Helvetica;
-            background: rgb(169, 134, 134);
+            background: rgb(8, 48, 17);
         }
         
-        div {
-            margin: 150px;
+        h2 {
+            text-align: center;
+            color: rgb(139, 11, 11);
+            font-family: Arial;
+            font-size: 30px;
+        }
+        
+        .warpper {
+            display: flex;
+            /*   flex-direction: column; */
+            /*   align-items: center; */
+        }
+        
+        .tab {
+            cursor: pointer;
+            padding: 10px 60px;
+            margin: 0px 3px;
+            background: rgb(8, 48, 17);
+            display: inline-block;
+            color: rgb(255, 255, 255);
+            border-radius: 5px;
+            box-shadow: 0rem 0rem 0.1rem 0.1rem #d14444f1;
+        }
+        
+        .tabs {
+            display: flex;
+            flex-direction: column;
+        }
+        /*=================== patient list =========== */
+        
+        .patientList {
+            margin: 10px;
         }
         
         table {
-            margin-left: 450px;
+            border: 1px solid black;
+            margin-left: 10px;
             font-size: 18px;
             border-collapse: collapse;
-            width: 70%;
-            max-width: 100%;
+            width: 100%;
             background-color: white;
         }
         
         td,
         th {
+            border: 1px solid black;
             text-align: center;
             padding: 10px;
             font-size: 18px;
         }
         
         thead th {
-            color: #ffffff;
-            background: #4FC3A1;
+            color: #1f1919;
+            background: rgb(79, 195, 161);
         }
         
         thead th:nth-child(odd) {
             color: #ffffff;
             background: #324960;
         }
+        /* ============= end Patient list =================*/
+        
+        .panels {
+            background: #fffffff6;
+            height: 1000px;
+            width: 100%;
+            border-radius: 3px;
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        .panel {
+            display: none;
+            animation: fadein .8s;
+        }
+        
+        .radio {
+            display: none;
+        }
+        
+        #one:checked~.panels #one-panel,
+        #two:checked~.panels #two-panel,
+        #three:checked~.panels #three-panel {
+            display: block
+        }
+        
+        #one:checked~.tabs #one-tab,
+        #two:checked~.tabs #two-tab,
+        #three:checked~.tabs #three-tab {
+            background: #fffffff6;
+            color: #000;
+        }
     </style>
-    <title>Visits list.</title>
 </head>
 
 <body>
@@ -65,39 +127,62 @@
 
         function checkCookie() {
             var user = accessCookie("testCookie");
-            if (user !== "")
-                alert("Welcome Back " + user + "!!!");
+            // if (user !== "")
+            //     alert("Welcome Back " + user + "!!!");
         }
         checkCookie();
     </script>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Data of birth</th>
-                    <th>Gender</th>
-                    <th>Email</th>
-                    <th>Number</th>
-                    <th>Data</th>
-                    <th>Vaccine</th>
-                </tr>
-                <tbody>
-                    {% for i in visits %}
-                    <tr>
-                        <td>{{i.first_name}}</td>
-                        <td>{{i.last_name}}</td>
-                        <td>{{i.date_of_birth}}</td>
-                        <td>{{i.gender}}</td>
-                        <td>{{i.email}}</td>
-                        <td>{{i.phone_number}}</td>
-                        <td>{{i.data}}</td>
-                        <td>{{i.do_you_want_vaccine}}</td>
-                    </tr>
-                    {% endfor %}
-        </table>
+    <h2>LabCov19</h2>
+    <div class="warpper">
+        <input class="radio" id="one" name="group" type="radio" checked>
+        <input class="radio" id="two" name="group" type="radio">
+        <input class="radio" id="three" name="group" type="radio">
+        <div class="tabs">
+            <img src="https://www.shareicon.net/data/512x512/2016/08/18/813855_people_512x512.png" alt="Nurse" style="width:200px">
+            <label class="tab" id="one-tab" for="one">Patient list</label>
+            <label class="tab" id="two-tab" for="two"></label>
+            <label class="tab" id="three-tab" for="three"></label>
+        </div>
+        <div class="panels">
+            <div class="panel" id="one-panel">
+                <div class="patientList">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Data of birth</th>
+                                <th>Gender</th>
+                                <th>Email</th>
+                                <th>Number</th>
+                                <th>Data</th>
+                                <th>Vaccine</th>
+                            </tr>
+                            <tbody>
+                                {% for i in visits %}
+                                <tr>
+                                    <td>{{i.first_name}}</td>
+                                    <td>{{i.last_name}}</td>
+                                    <td>{{i.date_of_birth}}</td>
+                                    <td>{{i.gender}}</td>
+                                    <td>{{i.email}}</td>
+                                    <td>{{i.phone_number}}</td>
+                                    <td>{{i.data}}</td>
+                                    <td>{{i.do_you_want_vaccine}}</td>
+                                </tr>
+                                {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="panel" id="two-panel">
+
+            </div>
+            <div class="panel" id="three-panel">
+
+            </div>
+        </div>
     </div>
+
 </body>
 
 </html>

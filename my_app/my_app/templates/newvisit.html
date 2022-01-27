@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {% load materializecss %}
 
     <meta charset="UTF-8">
     <title>New Visit</title>
 
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-<!--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">-->
-{% block css %}
+    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+    <!--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">-->
+    {% block css %}
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css" integrity="sha256-qj3p6P1fJIV+Ndv7RW1ovZI2UhOuboj9GcODzcNFIN8=" crossorigin="anonymous" />
-{% endblock css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css" integrity="sha256-qj3p6P1fJIV+Ndv7RW1ovZI2UhOuboj9GcODzcNFIN8=" crossorigin="anonymous" /> {% endblock css %}
 
-   <style>
+    <style>
         body,
         html {
             margin: 150px;
@@ -22,47 +22,69 @@
             height: 100%;
             background: #e7e4e4 !important;
         }
-        </style>
+        
+        .message {
+            border-radius: 15px;
+            box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.75);
+            color: white;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            text-align: center;
+            width: 30%;
+        }
+        
+        .message.success {
+            background-color: rgb(75, 141, 75);
+        }
+        
+        .message.error {
+            background-color: rgb(190, 89, 89);
+        }
+    </style>
 
 </head>
 
 <body>
 
 
-<center>
-{% block javascript %}
-<h1>Please, register for a visit.</h1>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+    <center>
+        {% block javascript %}
+        <h1>Please, register for a visit.</h1>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
 
-<script>
-$(document).ready(function(){
+        </script>
+        <script>
+            $(document).ready(function() {
+                // Initialize materialize data picker
+                $('.datepicker').datepicker({
+                    'format': 'yyyy-mm-dd'
+                });
+                $('select').formSelect();
 
-    // alert("Succesfully registered.");
+            });
 
-  // Initialize materialize data picker
-  $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
-  $('select').formSelect();
+            window.setTimeout(function() {
+                $(".messages").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+            }, 3000);
+        </script>
+        {% endblock javascript %} {% block content %}
+        <form method='POST'>
+            {% csrf_token %} {{ form|materializecss }}
+            <button type='submit' class="waves-effect waves light btn-large">Send</button>
+            <!--<input type="submit" value="Save" />-->
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %} {% endblock %}
+    </center>
 
-});
-</script>
-{% endblock javascript %}
-
-
-
-{% block content %}
-<form method='POST' >
-    {% csrf_token %}
-
-    {{ form|materializecss }}
-    <button type='submit' class="waves-effect waves light btn-large">Send</button>
-<!--<input type="submit" value="Save" />-->
-</form>
-{% endblock %}
-</center>
 </body>
+
 </html>
