@@ -31,7 +31,6 @@ urlpatterns = [
     path('', main),
     path('router', include(router.urls)),
     path('admin/', admin.site.urls),
-
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('api/mail', views.MailView.send),
     # path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
