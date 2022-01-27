@@ -17,18 +17,19 @@
    <style>
         body,
         html {
-            margin: 0;
+            margin: 150px;
             padding: 0;
             height: 100%;
-            background: #ffffff !important;
+            background: #e7e4e4 !important;
         }
         </style>
 
 </head>
 
 <body>
+<center>
 {% block javascript %}
-
+<h1>Please, sign up for a visit.</h1>
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -48,13 +49,14 @@ $(document).ready(function(){
 {% endblock javascript %}
 
 
-<center>
+
 {% block content %}
 <form method='POST' >
     {% csrf_token %}
 
     {{ form|materializecss }}
-<input type="submit" value="Save" />
+    <button type='submit' class="waves-effect waves light btn-large">Send</button>
+<!--<input type="submit" value="Save" />-->
 </form>
 {% endblock %}
 </center>
