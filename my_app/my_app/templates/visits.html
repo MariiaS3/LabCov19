@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
+
 
 <head>
 
@@ -40,6 +41,7 @@
             background: #324960;
         }
     </style>
+    <title>Visits list.</title>
 </head>
 
 <body>
@@ -55,7 +57,7 @@
             var allCookieArray = document.cookie.split(';');
             for (var i = 0; i < allCookieArray.length; i++) {
                 var temp = allCookieArray[i].trim();
-                if (temp.indexOf(name) == 0)
+                if (temp.indexOf(name) === 0)
                     return temp.substring(name.length, temp.length);
             }
             return "";
@@ -63,7 +65,7 @@
 
         function checkCookie() {
             var user = accessCookie("testCookie");
-            if (user != "")
+            if (user !== "")
                 alert("Welcome Back " + user + "!!!");
         }
         checkCookie();
