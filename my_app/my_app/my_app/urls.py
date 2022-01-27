@@ -18,7 +18,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from api_app import views
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,)
-from api_app.views import widok,template,main,visitsList,visit, NewVisit
+from api_app.views import widok,template,main,visitsList, NewVisit
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -43,5 +43,5 @@ urlpatterns = [
     path('widok', widok),
     path('template', template),
     path('main', main),
-    path('newvisit', NewVisit), #rejestracja wizyty
+    path('newvisit', NewVisit,name="newvisit"), #rejestracja wizyty
 ]

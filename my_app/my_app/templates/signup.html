@@ -19,7 +19,7 @@
         }
         
         .user_card {
-            width: 350px;
+            width: 390px;
             margin-top: auto;
             margin-bottom: auto;
             background: #2b5b06;
@@ -69,6 +69,13 @@
             box-shadow: none !important;
             outline: 0px !important;
         }
+        
+        #messages {
+            background-color: grey;
+            color: #fff;
+            padding: 10px;
+            margin-top: 10px;
+        }
     </style>
 
 </head>
@@ -100,17 +107,15 @@
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="text" name="password" placeholder="Password..." class="form-control" required>
+                            <input type="password" name="password" placeholder="Password..." class="form-control" required>
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="text" name="phone_number" placeholder="Phone number..." class="form-control" required>
+                            <input type="password" name="password2" placeholder="Password again..." class="form-control" required>
+
                         </div>
-
-
-
                         <div class="d-flex justify-content-center mt-3 login_container">
                             <a href="http://127.0.0.1:8000/widok">
                                 <input class="btn login_btn" type="submit" value="Register Account">
@@ -119,8 +124,15 @@
 
                     </form>
                 </div>
+                {% for message in messages %}
+                <p id="messages">{{message}}</p> {% endfor %}
 
+                <div class="mt-4">
+                    <div class="d-flex justify-content-center links">
+                        <h6 style="color:white;">If you have an account </h6><a href="http://127.0.0.1:8000/login" class="ml-2">Sign In</a>
+                    </div>
 
+                </div>
 
             </div>
         </div>

@@ -4,6 +4,7 @@ from rest_framework import serializers
 from django.conf import settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .task import task_send_email
+from django.contrib import messages
 
 class NurseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,10 +13,9 @@ class NurseSerializer(serializers.ModelSerializer):
             'username',
             'email',
             'password',
-            'phone_number',
-
+            'password2',
         )
-        extra_kwargs = {'password': {'write_only': True}}
+        extra_kwargs = {'password': {'write_only': True}, 'password2': {'write_only': True}}
 
   
 
