@@ -6,7 +6,7 @@ class VisitForm(forms.ModelForm):
     class Meta:
         model = Visit
         fields = [
-            'data',
+            'date',
             'first_name',
             'last_name',
             'date_of_birth',

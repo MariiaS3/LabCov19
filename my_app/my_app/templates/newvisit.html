@@ -17,9 +17,10 @@
     <style>
         body,
         html {
-            margin: 150px;
-            padding: 0;
-            height: 100%;
+            margin-top: 30px;
+            margin-left: 150px;
+            margin-right: 150px;
+            height: 930px;
             background: #e7e4e4 !important;
         }
         
@@ -74,7 +75,7 @@
         {% endblock javascript %} {% block content %}
         <form method='POST'>
             {% csrf_token %} {{ form|materializecss }}
-            <button type='submit' class="waves-effect waves light btn-large">Send</button>
+            <button type='submit' class="waves-effect waves light btn-large">Register</button>
             <!--<input type="submit" value="Save" />-->
             {% if messages %}
             <div class="messages">

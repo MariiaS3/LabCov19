@@ -17,7 +17,7 @@ class Nurse(LablUser):
     pass
 # 'log', models.BooleanField(default=True)),
 class Visit(models.Model):
-    data = models.DateField() #data wizyty
+    date = models.DateField() #data wizyty
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField()
