@@ -23,6 +23,7 @@ from django.db.models import Q
 from .forms import VisitForm
 import re
 from django.shortcuts import get_object_or_404
+from datetime import datetime
 
 class Login(generics.GenericAPIView):
 
@@ -64,16 +65,7 @@ def Logout(request):
         nurse.save()
     return redirect('login')
   
-# @login_required(login_url='login')
-def visitsList(request):
-    user =  Nurse.objects.filter(is_active=True) 
-    if user:
-        nurse =  Nurse.objects.get(is_active=True) 
-        print(nurse) 
-        visits = Visit.objects.all()
-        return render(request, 'visits.html', {'visits':visits, 'nurse': nurse})
-    return render(request, 'visits.html', {})
-    
+
 
 class MyObtainTokenPairView(TokenObtainPairView):
     permission_classes = (AllowAny,)
@@ -178,8 +170,23 @@ def template(request,*args,**kwargs):
     return render(request, "signin.html",{})
 
 
+def visitsList(request):
+    user =  Nurse.objects.filter(is_active=True) 
+    if user:
+        nurse =  Nurse.objects.get(is_active=True) 
+        print(nurse) 
+        visits = Visit.objects.all()
+        return render(request, 'visits.html', {'visits':visits, 'nurse': nurse})
+    return render(request, 'visits.html', {})
+    
+
 def main(request,*args,**kwargs):
-    print("Zalogowany jako: ", request.user)
+    user =  Nurse.objects.filter(is_active=True) 
+    if user:
+        nurse =  Nurse.objects.get(is_active=True) 
+        print(nurse) 
+        print("Zalogowany jako: ", request.user)
+        return render(request, "index.html", {'nurse': nurse})
     return render(request, "index.html",{})
 
 
@@ -188,12 +195,14 @@ def NewVisit(request):
     if request.method == 'POST':
         if form.is_valid():
             form.save(commit=True) #zapisz do bazy
+            email = form.cleaned_data['email']
+            name = form.cleaned_data['first_name']
+            date = str(form.cleaned_data['data'])
+            task = task_send_email('Your new visit','Hi '+name+',\n\n'+'Thank you for registering in LabCov19.\n The day of your visit is '+date+ '.\n\nWe hope your visit will be nice.\n Feel free to ask any questions.\n',email)
             form=VisitForm() # refresh
             messages.success(request, 'Successfully registered.')
-            print("Successfully registered.")
-            # return render(request,"newvisit.html", {})
         else:
-            messages.error(request, '.........')
+            messages.error(request, 'Something wrong')
     
     context = {
         'form' : form
