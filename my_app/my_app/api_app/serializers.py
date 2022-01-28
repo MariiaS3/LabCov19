@@ -13,9 +13,8 @@ class NurseSerializer(serializers.ModelSerializer):
             'username',
             'email',
             'password',
-            'password2',
         )
-        extra_kwargs = {'password': {'write_only': True}, 'password2': {'write_only': True}}
+        extra_kwargs = {'password': {'write_only': True}}
 
   
 

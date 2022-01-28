@@ -5,8 +5,9 @@ from django.contrib.auth.models import AbstractBaseUser, UserManager
 class LablUser(AbstractBaseUser):
     username = models.CharField(max_length=50, unique=True)
     email = models.CharField(max_length=200, unique=True)
-    phone_number = models.CharField(max_length=10, unique=True, null=False, blank=False)
-    token = ""
+    phone_number = models.CharField(max_length=10, blank=False)
+    token = models.CharField(max_length=600, unique=True, null=True)
+    is_active = models.BooleanField(default=False)
     objects = UserManager()
     USERNAME_FIELD = 'username'
     class Meta:
@@ -14,7 +15,7 @@ class LablUser(AbstractBaseUser):
 
 class Nurse(LablUser):
     pass
-
+# 'log', models.BooleanField(default=True)),
 class Visit(models.Model):
     data = models.DateField() #data wizyty
     first_name = models.CharField(max_length=100)
