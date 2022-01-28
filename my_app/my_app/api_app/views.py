@@ -1,3 +1,4 @@
+
 from atexit import register
 from socket import timeout
 from django.conf import settings
@@ -21,6 +22,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.db.models import Q
 from .forms import VisitForm
 import re
+from django.shortcuts import get_object_or_404
 
 class Login(generics.GenericAPIView):
 
@@ -45,6 +47,7 @@ class Login(generics.GenericAPIView):
                 return  render(request, 'signin.html', {})
             refresh = RefreshToken.for_user(user)
             user.token = str(refresh.access_token)
+            user.is_active = True
             user.save()
             print(user.token)
             return render(request, 'cookies.html', {'token': user.token})
@@ -53,13 +56,23 @@ class Login(generics.GenericAPIView):
 
 
 def Logout(request):
-    
+    user =  Nurse.objects.filter(is_active=True) 
+    if user:
+        nurse =  Nurse.objects.get(is_active=True) 
+        nurse.is_active = False
+        nurse.token = ""
+        nurse.save()
     return redirect('login')
   
 # @login_required(login_url='login')
 def visitsList(request):
-    visits = Visit.objects.all()
-    return render(request, 'visits.html', {'visits':visits})
+    user =  Nurse.objects.filter(is_active=True) 
+    if user:
+        nurse =  Nurse.objects.get(is_active=True) 
+        print(nurse) 
+        visits = Visit.objects.all()
+        return render(request, 'visits.html', {'visits':visits, 'nurse': nurse})
+    return render(request, 'visits.html', {})
     
 
 class MyObtainTokenPairView(TokenObtainPairView):
@@ -71,7 +84,7 @@ def password_check(password):
  digit_error = re.search(r"\d", password) is None 
  uppercase_error = re.search(r"[A-Z]", password) is None 
  lowercase_error = re.search(r"[a-z]", password) is None 
- symbol_error = re.search(r"[ !#$%&'()*+,-./[\\\]^_`{|}~"+r'"]', password) is None 
+ symbol_error = re.search(r"[ !#$@%&'()*+,-./[\\\]^_`{|}~"+r'"]', password) is None 
  password_ok = not ( length_error or digit_error or uppercase_error or lowercase_error or symbol_error ) 
  
  return {

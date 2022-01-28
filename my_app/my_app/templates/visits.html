@@ -8,12 +8,12 @@
     <style>
         body {
             font-family: Helvetica;
-            background: rgb(8, 48, 17);
+            background: rgb(79, 195, 161);
         }
         
         h2 {
             text-align: center;
-            color: rgb(139, 11, 11);
+            color: rgb(248, 245, 245);
             font-family: Arial;
             font-size: 30px;
         }
@@ -28,11 +28,17 @@
             cursor: pointer;
             padding: 10px 60px;
             margin: 0px 3px;
-            background: rgb(8, 48, 17);
+            background: rgb(50, 74, 98);
             display: inline-block;
             color: rgb(255, 255, 255);
             border-radius: 5px;
             box-shadow: 0rem 0rem 0.1rem 0.1rem #d14444f1;
+        }
+        
+        #name {
+            text-align: center;
+            color: rgb(224, 69, 58);
+            font-size: 22px;
         }
         
         .tabs {
@@ -69,7 +75,7 @@
         
         thead th:nth-child(odd) {
             color: #ffffff;
-            background: #324960;
+            background: rgb(50, 74, 98);
         }
         /* ============= end Patient list =================*/
         
@@ -130,8 +136,14 @@
             // if (user !== "")
             //     alert("Welcome Back " + user + "!!!");
         }
+
+        function login() {
+
+            window.location.href = "http://127.0.0.1:8000/login/"
+        }
         checkCookie();
     </script>
+    {% if nurse %}
     <h2>LabCov19</h2>
     <div class="warpper">
         <input class="radio" id="one" name="group" type="radio" checked>
@@ -139,6 +151,7 @@
         <input class="radio" id="three" name="group" type="radio">
         <div class="tabs">
             <img src="https://www.shareicon.net/data/512x512/2016/08/18/813855_people_512x512.png" alt="Nurse" style="width:200px">
+            <p id="name">{{nurse.username}}</p>
             <label class="tab" id="one-tab" for="one">Patient list</label>
             <label class="tab" id="two-tab" for="two"></label>
             <label class="tab" id="three-tab" for="three"></label>
@@ -182,7 +195,10 @@
             </div>
         </div>
     </div>
-
+    {% else %}
+    <script>
+        login();
+    </script>{% endif %}
 </body>
 
 </html>
