@@ -39,7 +39,17 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <body class="w3-content" style="max-width:100%" style="height:100%">
+    <script type="text/javascript">
+        function dashboard() {
 
+            window.location.href = "http://127.0.0.1:8000/visits"
+        }
+
+        function login() {
+
+            window.location.href = "http://127.0.0.1:8000/login/"
+        }
+    </script>
     <div class="w3-row">
 
         <div class="w3-half w3-indigo w3-container w3-center" style="height:930px">
@@ -49,7 +59,10 @@
                 <div class="w3-left-align w3-padding-large">
                     <br>
                     <p>
-                        <center><button class="button button1"><a href="http://127.0.0.1:8000/login/" style="text-decoration: none;">Continue as Nurse.</a></button></center>
+                        {% if nurse %}
+                        <center><input class="button button1" type="button" onclick="dashboard()" value="Continue as Nurse."></center> {% else %}
+                        <center><input class="button button1" type="button" onclick="login()" value="Continue as Nurse."></center>
+                        {% endif %}
                 </div>
             </div>
         </div>
