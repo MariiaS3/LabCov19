@@ -4,10 +4,9 @@
 
 
 <head>
-
     {% block css %}
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    {% endblock css %}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> {% endblock css %}
+
 
     <style>
         body {
@@ -30,8 +29,9 @@
         
         .tab {
             cursor: pointer;
-            padding: 10px 60px;
-            margin: 0px 3px;
+            text-align: center;
+            padding: 10px 0px;
+            margin: 0px 5px;
             background: rgb(50, 74, 98);
             display: inline-block;
             color: rgb(255, 255, 255);
@@ -56,6 +56,15 @@
             margin: 10px;
         }
         
+        .patients {
+            border: 1px solid black;
+            margin-left: 10px;
+            font-size: 18px;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: white;
+        }
+        
         table {
             border: 1px solid black;
             margin-left: 10px;
@@ -63,7 +72,6 @@
             border-collapse: collapse;
             width: 100%;
             background-color: white;
-
         }
         
         td,
@@ -88,11 +96,10 @@
         .panels {
             background: #fffffff6;
             height: 1000px;
-            width: 100%;
+            width: 95%;
             border-radius: 3px;
             overflow: hidden;
             padding: 20px;
-
         }
         
         .panel {
@@ -105,68 +112,66 @@
         }
         
         #one:checked~.panels #one-panel,
-        #two:checked~.panels #two-panel,
-        #three:checked~.panels #three-panel {
+        #two:checked~.panels #two-panel {
             display: block
         }
         
         #one:checked~.tabs #one-tab,
-        #two:checked~.tabs #two-tab,
-        #three:checked~.tabs #three-tab {
+        #two:checked~.tabs #two-tab {
             background: #fffffff6;
             color: #000;
         }
-
-            .button {
-        border: none;
-        color: black;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
-
-    .button1 {
-        background-color: rgb(50, 74, 98);
-        color: white;
-        border: 1px solid #4CAF50;
-        margin-top: 520px;
-        /*margin-right: 10px;*/
-    }
-
-    .button1:hover {
-        background-color: red; /*rgb(91, 79, 195)*/
-        color: white;
-    }
-
+        
+        .button {
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        
+        .button1 {
+            background-color: rgb(50, 74, 98);
+            color: white;
+            border: 1px solid #4CAF50;
+            margin-top: 520px;
+            /*margin-right: 10px;*/
+        }
+        
+        .button1:hover {
+            background-color: red;
+            /*rgb(91, 79, 195)*/
+            color: white;
+        }
     </style>
 </head>
+
 <title>Visits List</title>
 <link rel="icon" href="https://st2.depositphotos.com/3616015/5350/v/600/depositphotos_53506147-stock-illustration-syringe-flat-icon-with-long.jpg">
 
 <body>
 
-{% block javascript %}
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+    {% block javascript %}
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
 
-<script>
-$(document).ready(function(){
+    <script>
+        $(document).ready(function() {
 
-  // Initialize materialize data picker
-  $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
-  $('select').formSelect();
+            // Initialize materialize data picker
+            $('.datepicker').datepicker({
+                'format': 'yyyy-mm-dd'
+            });
+            $('select').formSelect();
 
-});
-</script>
-{% endblock javascript %}
+        });
+    </script>
+    {% endblock javascript %}
 
 
     <script type="text/javascript">
@@ -193,12 +198,18 @@ $(document).ready(function(){
             //     alert("Welcome Back " + user + "!!!");
         }
 
+        function dashboard() {
+
+            window.location.href = "http://127.0.0.1:8000/visits"
+        }
+
         function login() {
 
             window.location.href = "http://127.0.0.1:8000/login/"
+
         }
 
-          function logout() {
+        function logout() {
 
             window.location.href = "http://127.0.0.1:8000/logout/"
         }
@@ -210,16 +221,12 @@ $(document).ready(function(){
     <div class="warpper">
         <input class="radio" id="one" name="group" type="radio" checked>
         <input class="radio" id="two" name="group" type="radio">
-        <input class="radio" id="three" name="group" type="radio">
         <div class="tabs">
-
-            <img src="https://www.shareicon.net/data/512x512/2016/08/18/813855_people_512x512.png" alt="Nurse" style="width:200px"  >
+            <img src="https://www.shareicon.net/data/512x512/2016/08/18/813855_people_512x512.png" alt="Nurse" style="width:200px">
             <p id="name">{{nurse.username}}</p>
             <label class="tab" id="one-tab" for="one">Patient list</label>
-            <label class="tab" id="two-tab" for="two"></label>
-            <label class="tab" id="three-tab" for="three"></label>
+            <label class="tab" id="two-tab" for="two">Patient results</label>
             <input class="button button1" type="button" onclick="logout()" value="Logout" align="right">
-
         </div>
         <div class="panels">
             <div class="panel" id="one-panel">
@@ -253,10 +260,34 @@ $(document).ready(function(){
                 </div>
             </div>
             <div class="panel" id="two-panel">
+                <div class="patientList">
+                    <table class=patients>
+                        <thead>
+                            <tr>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Email</th>
+                                <th>Date</th>
+                                <th>Completed visits</th>
+                            </tr>
+                            <tbody>
+                                {% for i in visits %}
+                                <tr>
+                                    <td>{{i.first_name}}</td>
+                                    <td>{{i.last_name}}</td>
+                                    <td>{{i.email}}</td>
+                                    <td>{{i.date}}</td>
+                                    <td>
+                                        <!-- <center><input type="button" value="Send mail"></center> -->
+                                        <form action="" method="get">
+                                            <input type="submit" name="{{i.email}}" value="Send mail">
+                                        </form>
 
-            </div>
-            <div class="panel" id="three-panel">
-
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                    </table>
+                </div>
             </div>
         </div>
     </div>

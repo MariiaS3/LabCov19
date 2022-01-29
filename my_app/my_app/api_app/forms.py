@@ -1,6 +1,6 @@
 from django import forms
-from .models import Nurse, Visit
-from django.contrib.auth.forms import UserCreationForm
+from .models import  Results, Visit
+
 
 class VisitForm(forms.ModelForm):
     class Meta:
@@ -14,4 +14,17 @@ class VisitForm(forms.ModelForm):
             'phone_number',
             'gender',
             'do_you_want_vaccine'
+        ]
+
+class ResultsForm(forms.ModelForm):
+    class Meta:
+        model = Results
+        fields = [
+            'first_name',
+            'last_name',
+            'email',
+            'phone_number',
+            'vaccine',
+            'results',
+            'messenge'
         ]

@@ -1,10 +1,9 @@
 from rest_framework import serializers
-from .models import Nurse, Visit
+from .models import Nurse
 from rest_framework import serializers
 from django.conf import settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .task import task_send_email
-from django.contrib import messages
+
 
 class NurseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,18 +15,6 @@ class NurseSerializer(serializers.ModelSerializer):
         )
         extra_kwargs = {'password': {'write_only': True}}
 
-  
-
-
-class VisitSerializer(serializers.ModelSerializer):
-    # def create(self, validated_data):
-    #     # validated_data['doctor'] = self.context['request'].user
-    #     instance = super().create(validated_data)
-    #     task = task_send_email('Wyniki','wszystko dobrze zyjesz',instance.email)
-    #     return instance
-    class Meta:
-         model = Visit
-         fields = '__all__'
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod

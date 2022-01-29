@@ -17,13 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from api_app import views
-from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,)
-from api_app.views import widok,template,main,visitsList, NewVisit
+# from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView,)
+from api_app.views import SendResults,main,visitsList, NewVisit
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-# router.register(r'nurse', views.NurseViews)
-# router.register(r'visit',views.VisitViews)
+
 
 
 # The API URLs are now determined automatically by the router.
@@ -32,16 +31,12 @@ urlpatterns = [
     path('router', include(router.urls)),
     path('admin/', admin.site.urls),
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('api/mail', views.MailView.send),
-    # path('login/', views.MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
-    path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('login/', views.Login.as_view(), name="login"),
     path('logout/', views.Logout, name="logout"),
-    path('signup/', views.NurseViews.as_view(), name="signup"),
-    path('visit/', views.NurseViews.as_view(), name="visit"),
-    path('visits', visitsList),
-    path('widok', widok),
-    path('template', template),
+    path('signup/', views.Register.as_view(), name="signup"),
+    path('visits', visitsList,name="visits"),
+    path('results', SendResults,name="results"),
     path('main', main),
     path('newvisit', NewVisit,name="newvisit"), #rejestracja wizyty
 ]

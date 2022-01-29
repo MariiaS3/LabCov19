@@ -33,3 +33,21 @@ class Visit(models.Model):
         ('N', 'NO'),
     )
     do_you_want_vaccine = models.CharField(max_length=1, choices=VACCINE_CHOICE)
+
+
+class Results(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.CharField(max_length=200)
+    phone_number = models.CharField(max_length=10)
+    messenge = models.CharField(max_length=600)
+    VACCINE_CHOICE = (  # czy byl zaszczepiony
+        ('Y', 'YES'),
+        ('N', 'NO'), 
+    )
+    vaccine = models.CharField(max_length=1, choices=VACCINE_CHOICE)
+    TEST_CHOICE = (  # czy byl zaszczepiony
+        ('P', 'POSITIVE'),
+        ('N', 'NEGATIVE'),
+    )
+    results =models.CharField(max_length=1, choices=TEST_CHOICE)
