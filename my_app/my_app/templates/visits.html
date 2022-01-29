@@ -23,8 +23,6 @@
         
         .warpper {
             display: flex;
-            /*   flex-direction: column; */
-            /*   align-items: center; */
         }
         
         .tab {
@@ -41,14 +39,43 @@
         
         #name {
             text-align: center;
-            color: rgb(224, 69, 58);
-            font-size: 22px;
+            color: rgb(102, 67, 228);
+            font-size: 23px;
         }
         
         .tabs {
             display: flex;
             flex-direction: column;
             margin-right: 10px;
+        }
+        
+        .panels {
+            background: #fffffff6;
+            height: 1000px;
+            width: 95%;
+            border-radius: 3px;
+            overflow: hidden;
+            padding: 20px;
+        }
+        
+        .panel {
+            display: none;
+            animation: fadein .8s;
+        }
+        
+        .radio {
+            display: none;
+        }
+        
+        #one:checked~.panels #one-panel,
+        #two:checked~.panels #two-panel {
+            display: block
+        }
+        
+        #one:checked~.tabs #one-tab,
+        #two:checked~.tabs #two-tab {
+            background: #fffffff6;
+            color: #000;
         }
         /*=================== patient list =========== */
         
@@ -92,35 +119,7 @@
             background: rgb(50, 74, 98);
         }
         /* ============= end Patient list =================*/
-        
-        .panels {
-            background: #fffffff6;
-            height: 1000px;
-            width: 95%;
-            border-radius: 3px;
-            overflow: hidden;
-            padding: 20px;
-        }
-        
-        .panel {
-            display: none;
-            animation: fadein .8s;
-        }
-        
-        .radio {
-            display: none;
-        }
-        
-        #one:checked~.panels #one-panel,
-        #two:checked~.panels #two-panel {
-            display: block
-        }
-        
-        #one:checked~.tabs #one-tab,
-        #two:checked~.tabs #two-tab {
-            background: #fffffff6;
-            color: #000;
-        }
+        /* =============  button ========================= */
         
         .button {
             border: none;
@@ -147,6 +146,7 @@
             /*rgb(91, 79, 195)*/
             color: white;
         }
+        /* ============= end button ========================= */
     </style>
 </head>
 
@@ -278,7 +278,6 @@
                                     <td>{{i.email}}</td>
                                     <td>{{i.date}}</td>
                                     <td>
-                                        <!-- <center><input type="button" value="Send mail"></center> -->
                                         <form action="" method="get">
                                             <input type="submit" name="{{i.email}}" value="Send mail">
                                         </form>
