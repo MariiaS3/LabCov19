@@ -4,7 +4,6 @@
 <head>
     {% load materializecss %}
 
-    <link rel="icon" href="https://st2.depositphotos.com/3616015/5350/v/600/depositphotos_53506147-stock-illustration-syringe-flat-icon-with-long.jpg">
     <meta charset="UTF-8">
     <title>New Visit</title>
 
@@ -15,7 +14,7 @@
     <style>
         body,
         html {
-            margin-top: 70px;
+            margin-top: 30px;
             margin-left: 150px;
             margin-right: 150px;
             height: 930px;
@@ -40,7 +39,7 @@
             background-color: rgb(190, 89, 89);
         }
     </style>
-    <title>New Visit</title>
+
 </head>
 
 <body>
@@ -48,7 +47,7 @@
 
     <center>
         {% block javascript %}
-        <h1>Please, register for a visit.</h1>
+        <h1>Fill out the form and send the results.</h1>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
@@ -73,15 +72,13 @@
         {% endblock javascript %} {% block content %}
         <form method='POST'>
             {% csrf_token %} {{ form|materializecss }}
-            <button type='submit' class="waves-effect waves light btn-large">Register</button>
-            <!--<input type="submit" value="Save" />-->
-            {% if messages %}
+            <button type='submit' class="waves-effect waves light btn-large">Register</button> {% if messages %}
             <div class="messages">
                 {% for message in messages %}
                 <p class="message {{ message.tags }}">{{ message }}</p>
                 {% endfor %}
             </div>
-            {% endif %} {% endblock %}</form>
+            {% endif %} {% endblock %}
     </center>
 
 </body>
