@@ -5,6 +5,10 @@
 
 <head>
 
+    {% block css %}
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% endblock css %}
+
     <style>
         body {
             font-family: Helvetica;
@@ -44,6 +48,7 @@
         .tabs {
             display: flex;
             flex-direction: column;
+            margin-right: 10px;
         }
         /*=================== patient list =========== */
         
@@ -58,6 +63,7 @@
             border-collapse: collapse;
             width: 100%;
             background-color: white;
+
         }
         
         td,
@@ -86,6 +92,7 @@
             border-radius: 3px;
             overflow: hidden;
             padding: 20px;
+
         }
         
         .panel {
@@ -109,10 +116,59 @@
             background: #fffffff6;
             color: #000;
         }
+
+            .button {
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button1 {
+        background-color: rgb(50, 74, 98);
+        color: white;
+        border: 1px solid #4CAF50;
+        margin-top: 520px;
+        /*margin-right: 10px;*/
+    }
+
+    .button1:hover {
+        background-color: red; /*rgb(91, 79, 195)*/
+        color: white;
+    }
+
     </style>
 </head>
+<title>Visits List</title>
+<link rel="icon" href="https://st2.depositphotos.com/3616015/5350/v/600/depositphotos_53506147-stock-illustration-syringe-flat-icon-with-long.jpg">
 
 <body>
+
+{% block javascript %}
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function(){
+
+  // Initialize materialize data picker
+  $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
+  $('select').formSelect();
+
+});
+</script>
+{% endblock javascript %}
+
+
     <script type="text/javascript">
         function createCookie(cookieName, cookieValue, daysToExpire) {
             var date = new Date();
@@ -141,6 +197,12 @@
 
             window.location.href = "http://127.0.0.1:8000/login/"
         }
+
+          function logout() {
+
+            window.location.href = "http://127.0.0.1:8000/logout/"
+        }
+
         checkCookie();
     </script>
     {% if nurse %}
@@ -150,11 +212,14 @@
         <input class="radio" id="two" name="group" type="radio">
         <input class="radio" id="three" name="group" type="radio">
         <div class="tabs">
-            <img src="https://www.shareicon.net/data/512x512/2016/08/18/813855_people_512x512.png" alt="Nurse" style="width:200px">
+
+            <img src="https://www.shareicon.net/data/512x512/2016/08/18/813855_people_512x512.png" alt="Nurse" style="width:200px"  >
             <p id="name">{{nurse.username}}</p>
             <label class="tab" id="one-tab" for="one">Patient list</label>
             <label class="tab" id="two-tab" for="two"></label>
             <label class="tab" id="three-tab" for="three"></label>
+            <input class="button button1" type="button" onclick="logout()" value="Logout" align="right">
+
         </div>
         <div class="panels">
             <div class="panel" id="one-panel">
