@@ -14,6 +14,16 @@
             background: rgb(79, 195, 161);
         }
         
+        .register {
+            display: flex;
+            flex-direction: row;
+            margin-left: 950px;
+        }
+        
+        .home {
+            margin-left: 750px;
+        }
+        
         h2 {
             text-align: center;
             color: rgb(248, 245, 245);
@@ -217,7 +227,10 @@
         checkCookie();
     </script>
     {% if nurse %}
-    <h2>LabCov19</h2>
+    <div class="register">
+        <h2>LabCov19</h2>
+        <a class="home" href="http://127.0.0.1:8000"><img src="https://img.icons8.com/dusk/48/000000/home.png"></a>
+    </div>
     <div class="warpper">
         <input class="radio" id="one" name="group" type="radio" checked>
         <input class="radio" id="two" name="group" type="radio">
