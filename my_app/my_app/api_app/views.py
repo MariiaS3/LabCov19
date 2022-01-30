@@ -152,13 +152,17 @@ def NewVisit(request):
     form = VisitForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-            form.save(commit=True) #zapisz do bazy
             email = form.cleaned_data['email']
-            name = form.cleaned_data['first_name']
-            date = str(form.cleaned_data['date'])
-            task_send_email('Your new visit','Hi '+name+',\n\n'+'Thank you for registering in LabCov19.\n The day of your visit is '+date+ '.\n\nWe hope your visit will be nice.\n Feel free to ask any questions.\n',email)
-            form=VisitForm() # refresh
-            messages.success(request, 'Successfully registered.')
+            if '@' in email:
+                form.save(commit=True) #zapisz do bazy
+                email = form.cleaned_data['email']
+                name = form.cleaned_data['first_name']
+                date = str(form.cleaned_data['date'])
+                task_send_email('Your new visit','Hi '+name+',\n\n'+'Thank you for registering in LabCov19.\n The day of your visit is '+date+ '.\n\nWe hope your visit will be nice.\n Feel free to ask any questions.\n',email)
+                form=VisitForm() # refresh
+                messages.success(request, 'Successfully registered.')
+            else:
+                messages.error(request, 'Email is incorrect')
         else:
             messages.error(request, 'Something wrong')
     
