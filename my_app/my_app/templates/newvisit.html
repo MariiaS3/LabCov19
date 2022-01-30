@@ -15,14 +15,24 @@
     <style>
         body,
         html {
-            margin-top: 70px;
+            margin-top: 10px;
             margin-left: 150px;
             margin-right: 150px;
             height: 930px;
             background: #e7e4e4 !important;
         }
         
-        .message {
+        .register {
+            display: flex;
+            flex-direction: row;
+            margin-left: 290px;
+        }
+        
+        .home {
+            margin-left: 250px;
+        }
+        
+        .h .message {
             border-radius: 15px;
             box-shadow: 3px 3px 4px 0px rgba(50, 50, 50, 0.75);
             color: white;
@@ -48,7 +58,10 @@
 
     <center>
         {% block javascript %}
-        <h1>Please, register for a visit.</h1>
+        <div class="register">
+            <h1>Please, register for a visit.</h1>
+            <a class="home" href="http://127.0.0.1:8000"><img src="https://img.icons8.com/dusk/48/000000/home.png"></a>
+        </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/js/materialize.min.js" integrity="sha256-SrBfGi+Zp2LhAvy9M1bWOCXztRU9Ztztxmu5BcYPcPE=" crossorigin="anonymous"></script>
@@ -73,6 +86,7 @@
         {% endblock javascript %} {% block content %}
         <form method='POST'>
             {% csrf_token %} {{ form|materializecss }}
+
             <button type='submit' class="waves-effect waves light btn-large">Register</button>
             <!--<input type="submit" value="Save" />-->
             {% if messages %}
