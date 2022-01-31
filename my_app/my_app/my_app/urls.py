@@ -35,7 +35,7 @@ urlpatterns = [
     path('login/', views.Login.as_view(), name="login"),
     path('logout/', views.Logout, name="logout"),
     path('signup/', views.Register.as_view(), name="signup"),
-    path('visits', visitsList,name="visits"),
+    path('dashboard', visitsList,name="dashboard"),
     path('results', SendResults,name="results"),
     path('main', main),
     path('newvisit', NewVisit,name="newvisit"), #rejestracja wizyty

@@ -138,14 +138,14 @@ def visitsList(request):
         email = list(request.GET)
         if email == []:
             visits = Visit.objects.all()
-            return render(request, 'visits.html', {'visits':visits, 'nurse': nurse})
+            return render(request, 'dashboard.html', {'visits':visits, 'nurse': nurse})
         else:
             Results.objects.all().delete()
             visit = Visit.objects.get(email=email[0])
             Results.objects.create(email=visit.email, first_name=visit.first_name,last_name=visit.last_name,phone_number=visit.phone_number,vaccine=visit.do_you_want_vaccine) 
             Visit.objects.filter(email=email[0]).delete()          
             return redirect( 'results')
-    return render(request, 'visits.html', {})
+    return render(request, 'dashboard.html', {})
 
 #Register for a new visit
 def NewVisit(request):
@@ -188,7 +188,7 @@ def SendResults(request):
                 task_send_email('Results','Hello '+name+',\nYour test your test is ready, your test result is: NEGATIVE \n We encourage you to vaccinate yourself.\nYou also have a message from the nurse '+message,email)
             elif test == 'P':
                 task_send_email('Results','Hello '+name+',\nYour test your test is ready, your test result is: POSITIVE \nWe wish you a quick recovery and encourage you to vaccinate yourself.\nYou also have a message from the nurse '+message,email)
-            return redirect("visits")
+            return redirect("dashboard")
         else:
             messages.error(request, 'Something wrong')
 

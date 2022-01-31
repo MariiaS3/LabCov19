@@ -14,11 +14,11 @@
     <style>
         body,
         html {
-            margin-top: 30px;
-            margin-left: 150px;
-            margin-right: 150px;
-            height: 930px;
             background: #e7e4e4 !important;
+            width: 90%;
+            margin: auto;
+            min-width: 600px;
+            max-width: 2000px
         }
         
         .message {
@@ -41,6 +41,7 @@
     </style>
 
 </head>
+<link rel="icon" href="https://st2.depositphotos.com/3616015/5350/v/600/depositphotos_53506147-stock-illustration-syringe-flat-icon-with-long.jpg">
 
 <body>
 
@@ -72,7 +73,7 @@
         {% endblock javascript %} {% block content %}
         <form method='POST'>
             {% csrf_token %} {{ form|materializecss }}
-            <button type='submit' class="waves-effect waves light btn-large">Register</button> {% if messages %}
+            <button type='submit' class="waves-effect waves light btn-large">Send Email</button> {% if messages %}
             <div class="messages">
                 {% for message in messages %}
                 <p class="message {{ message.tags }}">{{ message }}</p>
