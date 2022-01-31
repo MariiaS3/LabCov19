@@ -3,19 +3,19 @@ Medyczne systemy informacyjne - projekt
 
 #LabCov19
 
-##HomePage
+### HomePage
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/1.png)
-##Register Visit
+### Register Visit
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/2.png)
-##Recived mail
+### Recived mail
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/3.png)
-##Login Panel
+### Login Panel
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/4.png)
-##Visits list
+### Visits list
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/5.png)
-##Send mail
+### Send mail
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/7.png)
-##Reviced mail
+### Reviced mail
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/8.png)
 
 
