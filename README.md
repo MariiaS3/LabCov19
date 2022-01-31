@@ -1,16 +1,14 @@
 # Medical_information_systems
 Medyczne systemy informacyjne - projekt
 
-#LabCov19
+# LabCov19
 
 ### HomePage
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/1.png)
 ### Register Visit
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/2.png)
 ### Recived mail
-[center]
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/3.png)
-[/center]
 ### Login Panel
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/4.png)
 ### Visits list
@@ -20,7 +18,7 @@ Medyczne systemy informacyjne - projekt
 ### Reviced mail
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/8.png)
 
-
+# Co było na zajęciach?
 19.10.2021 - instalujemy dockera
 
 09.11.2021  - podpinamy baze postgresową
