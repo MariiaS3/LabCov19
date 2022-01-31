@@ -8,7 +8,9 @@ Medyczne systemy informacyjne - projekt
 ### Register Visit
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/2.png)
 ### Recived mail
+[center]
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/3.png)
+[/center]
 ### Login Panel
 ![homepage snap](https://github.com/MariiaS3/Medyczne_Systemy/blob/main/my_app/screenshots/4.png)
 ### Visits list
